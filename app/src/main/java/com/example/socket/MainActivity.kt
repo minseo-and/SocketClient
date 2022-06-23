@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import java.io.DataInputStream
+import java.io.DataOutputStream
 import java.net.Socket
 import kotlin.concurrent.thread
 
@@ -38,8 +39,14 @@ class MainActivity : AppCompatActivity() {
                     text.append("a4 : $a4\n")
                 }
 
+                val outPutString = socket.getOutputStream()
+                val dos = DataOutputStream(outPutString)
 
-
+                //서버로 데이터 전달
+                dos.writeInt(200)
+                dos.writeDouble(22.22)
+                dos.writeBoolean(false)
+                dos.writeUTF("클라이언트가 보낸 문자열")
 
                 socket.close()
             }
